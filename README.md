@@ -15,6 +15,6 @@ Aula 02 - <a href="https://www.canva.com/design/DAFq-5hgfnQ/1BBM5-_Akzulqm4whhaX
 </h3>
 
 <h3  align="center">
-Aplicativo para atividades - <a href="https://openprocessing.org/join/28A1F1/" target="blank"> cadastre usando seu nome de registro, não pode ser nome falso (fake)
+Aplicativo para atividades - <a href="https://openprocessing.org/join/28A1F1/" target="blank"> cadastre usando seu nome de registro
 
 </h3>
