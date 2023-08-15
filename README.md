@@ -24,3 +24,8 @@ Aula 03 - <a href="#
 /" target="_blank">15/08/2023</a>
 </h3>
 
+<h3 align="center">
+Material da aula <a href="https://github.com/karlacorrea/CG2023/blob/main/ComputacaoGrafica1-%20sistemas%20de%20coordenadas.pdf" target="blank">
+</a>
+</h3>
+
