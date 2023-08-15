@@ -18,3 +18,6 @@ Aula 02 - <a href="https://www.canva.com/design/DAFq-5hgfnQ/1BBM5-_Akzulqm4whhaX
 Aplicativo para atividades - <a href="https://openprocessing.org/join/28A1F1/" target="blank"> cadastre usando seu nome de registro
 
 </h3>
+
+Aula 02 - <a href="#
+/" target="_blank">15/08/2023</a>
