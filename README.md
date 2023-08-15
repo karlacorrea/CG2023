@@ -25,7 +25,7 @@ Aula 03 - <a href="#
 </h3>
 
 <h3 align="center">
-Material da aula <a href="https://github.com/karlacorrea/CG2023/blob/main/ComputacaoGrafica1-%20sistemas%20de%20coordenadas.pdf" target="blank">
+Material da aula <a href="https://github.com/karlacorrea/CG2023/blob/main/ComputacaoGrafica1-%20sistemas%20de%20coordenadas.pdf/" target="blank">
 </a>
 </h3>
 
