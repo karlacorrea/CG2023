@@ -1,0 +1,105 @@
+<!DOCTYPE html>  
+<html lang="pt-br">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Xilofone HTML Interativo</title>  
+  <style>  
+    body {  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      height: 100vh;  
+      margin: 0;  
+      background-color: #f0f0f0;  
+    }  
+
+    .xylophone {  
+      display: flex;  
+      flex-direction: row;  
+      gap: 10px;  
+    }  
+
+    .key {  
+      width: 80px;  
+      height: 300px;  
+      border-radius: 5px;  
+      cursor: pointer;  
+      transition: transform 0.1s ease-in-out;  
+    }  
+
+    .key.active {  
+      transform: translateY(10px);  
+    }  
+
+    .key-c { background-color: #ff6b6b; }  
+    .key-d { background-color: #ffa500; }  
+    .key-e { background-color: #ffff00; }  
+    .key-f { background-color: #7fff00; }  
+    .key-g { background-color: #00ff00; }  
+    .key-a { background-color: #00ffff; }  
+    .key-b { background-color: #0000ff; }  
+  </style>  
+</head>  
+<body>  
+	
+  <div class="xylophone">  
+    <div class="key key-c" data-note="C4"></div>  
+    <div class="key key-d" data-note="D4"></div>  
+    <div class="key key-e" data-note="E4"></div>  
+    <div class="key key-f" data-note="F4"></div>  
+    <div class="key key-g" data-note="G4"></div>  
+    <div class="key key-a" data-note="A4"></div>  
+    <div class="key key-b" data-note="B4"></div>  
+  </div>  
+
+  <script>  
+    const keys = document.querySelectorAll('.key');  
+    const audioContext = new AudioContext();  
+
+    keys.forEach(key => {  
+      key.addEventListener('mousedown', () => {  
+        playNote(key.dataset.note);  
+        key.classList.add('active');  
+      });  
+
+      key.addEventListener('mouseup', () => {  
+        key.classList.remove('active');  
+      });  
+    });  
+
+    function playNote(note) {  
+      const oscillator = audioContext.createOscillator();  
+      oscillator.type = 'sine';  
+
+      switch (note) {  
+        case 'C4':  
+          oscillator.frequency.value = 261.63;  
+          break;  
+        case 'D4':  
+          oscillator.frequency.value = 293.66;  
+          break;  
+        case 'E4':  
+          oscillator.frequency.value = 329.63;  
+          break;  
+        case 'F4':  
+          oscillator.frequency.value = 349.23;  
+          break;  
+        case 'G4':  
+          oscillator.frequency.value = 392.00;  
+          break;  
+        case 'A4':  
+          oscillator.frequency.value = 440.00;  
+          break;  
+        case 'B4':  
+          oscillator.frequency.value = 493.88;  
+          break;  
+      }  
+
+      oscillator.connect(audioContext.destination);  
+      oscillator.start();  
+      oscillator.stop(audioContext.currentTime + 0.5);  
+    }  
+  </script>  
+</body>  
+</html>  
