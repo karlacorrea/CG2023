@@ -1,0 +1,97 @@
+<!DOCTYPE html>  
+<html lang="pt-br">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Xilofone em HTml com coordenadas</title>  
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>  
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">  
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full">  
+    <h1 class="text-2xl font-bold mb-4">Xilofone</h1>  
+    <div class="relative mb-8">  
+      <div id="xylophone" class="flex gap-2 mb-4"></div>  
+      <div id="coordinates" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>  
+    </div>  
+    <div class="mb-4">  
+      <h2 class="text-xl font-semibold mb-2">Informações:</h2>  <br>
+      <h3 class="text-x1 font-semibold mb-2">  O xilofone HTML tem 7 teclas coloridas, cada uma representando
+        uma nota musical diferente (C4, D4, E4, F4, G4, A4, B4).<br>
+        Para tocar uma nota, clique e mantenha pressionada a tecla
+        correspondente. A tecla indicará visualmente que está sendo
+        pressionada.<br>
+        A API de áudio da Web é usada para gerar um som de onda senoidal
+        simples para cada nota com base em sua frequência.<br>
+        O som será reproduzido por 0.5 segundos quando a tecla for
+        pressionada e depois parará</h3><br>
+      <ul class="list-disc pl-6">  
+        <li>A computação gráfica lida com grandes volumes de dados em diferentes sistemas de coordenadas.</li>  
+        <li>Os dispositivos gráficos possuem um conjunto de pontos ou pixels endereçáveis.</li>  
+        <li>Padrões gráficos são produzidos ativando (pintando) e desativando esses pontos.</li>  
+        <li>O sistema de coordenadas do dispositivo começa no ponto (0, 0), geralmente no canto superior esquerdo.</li>  
+        <li>O número de pixels endereçáveis varia entre dispositivos.</li>  
+      </ul>  
+    </div>  
+  </div>  
+
+  <script>  
+    const audioContext = new AudioContext();  
+    const notes = [  
+      { note: 'C4', freq: 261.63, color: '#ff5b8b' },  
+      { note: 'D4', freq: 293.66, color: '#ffa500' },  
+      { note: 'E4', freq: 329.63, color: '#ffff00' },  
+      { note: 'F4', freq: 349.23, color: '#7fff00' },  
+      { note: 'G4', freq: 392.00, color: '#00ff00' },  
+      { note: 'A4', freq: 440.00, color: '#00ffff' },  
+      { note: 'B4', freq: 493.88, color: '#0000ff' }  
+    ];  
+
+    const xylophone = document.getElementById('xylophone');  
+    const coordinates = document.getElementById('coordinates');  
+
+    notes.forEach((noteData, index) => {  
+      const key = document.createElement('div');  
+      key.className = 'w-16 h-64 rounded cursor-pointer transition-transform duration-100 ease-in-out';  
+      key.style.backgroundColor = noteData.color;  
+      key.dataset.note = noteData.note;  
+      key.dataset.freq = noteData.freq;  
+
+      key.addEventListener('mousedown', () => {  
+        playNote(noteData.freq);  
+        key.style.transform = 'translateY(10px)';  
+      });  
+
+      key.addEventListener('mouseup', () => {  
+        key.style.transform = 'translateY(0)';  
+      });  
+
+      xylophone.appendChild(key);  
+    });  
+
+    function playNote(freq) {  
+      const oscillator = audioContext.createOscillator();  
+      oscillator.type = 'sine';  
+      oscillator.frequency.value = freq;  
+      oscillator.connect(audioContext.destination);  
+      oscillator.start();  
+      oscillator.stop(audioContext.currentTime + 0.5);  
+    }  
+
+    function drawCoordinates() {  
+      const rect = xylophone.getBoundingClientRect();  
+      coordinates.innerHTML = `  
+        <svg width="${rect.width}" height="${rect.height}" class="absolute top-0 left-0">  
+          <line x1="0" y1="0" x2="${rect.width}" y2="0" stroke="red" stroke-width="2" />  
+          <line x1="0" y1="0" x2="0" y2="${rect.height}" stroke="red" stroke-width="2" />  
+          <text x="5" y="20" fill="red">(0,0)</text>  
+          <text x="${rect.width - 40}" y="20" fill="red">(${Math.round(rect.width)},0)</text>  
+          <text x="5" y="${rect.height - 5}" fill="red">(0,${Math.round(rect.height)})</text>  
+        </svg>  
+      `;  
+    }  
+
+    window.addEventListener('load', drawCoordinates);  
+    window.addEventListener('resize', drawCoordinates);  
+  </script>  
+</body>  
+</html>  
